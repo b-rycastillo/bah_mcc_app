@@ -31,11 +31,24 @@ public class CustomerAPI {
 		return this.customerList;
 	}
 	
-	@GetMapping("/id/{customerId}")
+	//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
+	
+	@GetMapping("id/{customerId}")
 	public Customer getCustomerById(@PathVariable("customerId") long id) {
 		Customer customer = null;
 		for (int i = 0 ; i < customerList.size(); i++) {
 			if(customerList.get(i).getId() == id) {
+				customer = customerList.get(i);
+			}
+		}
+		return customer;
+	}
+	
+	@GetMapping("name/{name}")
+	public Customer getCustomerByName(@PathVariable("name") String name) {
+		Customer customer = null;
+		for (int i = 0 ; i < customerList.size(); i++) {
+			if(customerList.get(i).getName().equalsIgnoreCase(name)) {
 				customer = customerList.get(i);
 			}
 		}
