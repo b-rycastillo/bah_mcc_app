@@ -82,7 +82,16 @@ public class CustomerAPI {
 		//  Workshop:  Write an implementation to look up a customer by name, using POST semantics
 		//  rather than GET.  You should be able to make use of most of your implmentation for
 		//  lookupCustomerByNameGet().  
-		return null;
+		Iterator<Customer> customers = repo.findAll().iterator();
+		while(customers.hasNext()) {
+			Customer cust = customers.next();
+			if(cust.getName().equalsIgnoreCase(username)){
+				URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{username}").buildAndExpand(cust.getName()).toUri(); 
+				ResponseEntity<?> response = ResponseEntity.created(location).build();
+				return response;
+			}
+		}
+		return ResponseEntity.badRequest().build();
 	}	
 	
 	

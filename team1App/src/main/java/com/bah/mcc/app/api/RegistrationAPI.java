@@ -43,7 +43,7 @@ public class RegistrationAPI {
 	@PostMapping
 	public ResponseEntity<?> addRegistration(@RequestBody Registration newRegistration, UriComponentsBuilder uri) {
 		//  Workshop:  Implementation to add a new registration; think about data validation and error handling.
-		if(newRegistration.getId()!=0||newRegistration.getEvent_id()!=0||newRegistration.getNotes()==null||newRegistration.getRegistration_date()==null||newRegistration.getCustomer_id()!=0) {
+		if(newRegistration.getEvent_id() == null ||newRegistration.getNotes()==null||newRegistration.getRegistration_date()== null || newRegistration.getCustomer_id() == null) {
 			return ResponseEntity.badRequest().build();
 		}
 		newRegistration=repo.save(newRegistration);
@@ -56,7 +56,7 @@ public class RegistrationAPI {
 	public ResponseEntity<?> putRegistration(@RequestBody Registration newRegistration,@PathVariable("eventId") long eventId) 
 	{
 		// Workshop: Implementation to update an event. Think about error handling.
-		if(newRegistration.getId()!=eventId||newRegistration.getId()!=0||newRegistration.getEvent_id()!=0||newRegistration.getNotes()==null||newRegistration.getRegistration_date()==null||newRegistration.getCustomer_id()!=0) {
+		if(newRegistration.getId()!=eventId || newRegistration.getEvent_id() == null ||newRegistration.getNotes()==null||newRegistration.getRegistration_date()== null || newRegistration.getCustomer_id() == null) {
 			return ResponseEntity.badRequest().build();
 		}
 		newRegistration=repo.save(newRegistration);
@@ -77,7 +77,7 @@ public class RegistrationAPI {
 			return ResponseEntity.badRequest().build();
 		}
 		repo.deleteById(id);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.noContent().build();
 	}	
 	
 }
