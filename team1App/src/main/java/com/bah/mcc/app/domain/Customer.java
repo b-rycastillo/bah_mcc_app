@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Table(name="CUSTOMERS")
 public class Customer {
 	
-//  Workshop:
+
 	//
 	//  Make a concrete implementation of a customer domain.  What attributes do you need for
 	//  Customer?  At the least, you need to be able to uniquely identify instances of Customer.
