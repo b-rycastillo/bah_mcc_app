@@ -1,4 +1,4 @@
-package com.bah.mcc.app;
+package com.bah.mcc.app.api;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
