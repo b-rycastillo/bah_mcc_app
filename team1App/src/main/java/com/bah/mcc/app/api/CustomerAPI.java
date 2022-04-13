@@ -32,14 +32,14 @@ public class CustomerAPI {
 	public Iterable<Customer> getAll() {
 		//  Workshop:  Write an implementation that replies with all customers.
 		//  Your implementation should be no more than a few lines, at most, and make use of the 'repo' object
-		return null;   
+		return repo.findAll();
 	}
 
 	@GetMapping("/{customerId}")
 	public Optional<Customer> getCustomerById(@PathVariable("customerId") long id) {
-		//  Workshop:  Write an implementatoin that looks up one customer.  What do you return if the requested 
+		//  Workshop:  Write an implementation that looks up one customer.  What do you return if the requested 
 		//  customer ID does not exists?  This implementation could be as short as a single line.
-		return null;
+		return repo.findById(id);
 	}
 	
 	@PostMapping
@@ -49,17 +49,29 @@ public class CustomerAPI {
 		//  not null and that no id was passed (it will be auto generated when the record
 		//  is inserted.  Remember REST semantics - return a reference to the newly created 
 		//  entity as a URI.
-		return null;
+		if (newCustomer.getId() != 0 || newCustomer.getName() == null || newCustomer.getEmail() == null) {
+			return ResponseEntity.badRequest().build();
+		}
+		newCustomer = repo.save(newCustomer);
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newCustomer.getId()).toUri(); 
+		ResponseEntity<?> response = ResponseEntity.created(location).build();
+		return response;
 	}
 
 	//lookupCustomerByName GET
 	@GetMapping("/byname/{username}")
-	public ResponseEntity<?> lookupCustomerByNameGet(@PathVariable("username") String username,
-			UriComponentsBuilder uri) {
-		//  Workshop:  Write an implemenatation to look up a customer by name.  Think about what
+	public ResponseEntity<?> lookupCustomerByNameGet(@PathVariable("username") String username, UriComponentsBuilder uri) {
+		//  Workshop:  Write an implementation to look up a customer by name.  Think about what
 		//  your response should be if no customer matches the name the caller is searching for.
 		//  With the data model implemented in CustomersRepository, do you need to handle more than
 		//  one match per request?
+//		Customer foundCustomer = null;
+//		repo.findAll().forEach(customer -> {
+//			if (customer.getName().equalsIgnoreCase(username)) {
+//				foundCustomer = customer;
+//			}
+//		});
+
 		return null;
 	}
 	
@@ -74,26 +86,27 @@ public class CustomerAPI {
 	
 	
 	@PutMapping("/{customerId}")
-	public ResponseEntity<?> putCustomer(
-			@RequestBody Customer newCustomer,
-			@PathVariable("customerId") long customerId) 
-	{
+	public ResponseEntity<?> putCustomer( @RequestBody Customer newCustomer, @PathVariable("customerId") long customerId) {
 		//  Workshop:  Write an implementation to update or create a new customer with an HTTP PUT, with the 
 		//  requestor specifying the customer ID.  Are there error conditions to be handled?  How much data
 		//  validation should you implement considering that customers are stored in a CustomersRepository object.
-		return null;
+		if (newCustomer.getId() != customerId || newCustomer.getName() == null || newCustomer.getEmail() == null) {
+			return ResponseEntity.badRequest().build();
+		}
+		newCustomer = repo.save(newCustomer);
+		return ResponseEntity.ok().build();
 	}	
 	
 	@DeleteMapping("/{customerId}")
 	public ResponseEntity<?> deleteCustomerById(@PathVariable("customerId") long id) {
-		//  Implement a method to delete a customer.  What is an appropriate response? 
-		//
-		//  For discussion (do not worry about implementation):  What are some ways of handling 
-		//  a "delete"?  Is it always the right thing from a business point of view to literally 
-		//  delete a customer entry?  If you did actually delete a customer entry, are there issues
-		//  you could potentially run into later? 
-		return null;
+		Optional<Customer> customerToDelete = repo.findById(id);
+		if(customerToDelete != null) {
+			 repo.deleteById(id);
+			 return ResponseEntity.noContent().build();
+			 
+		}
+		else {
+			return ResponseEntity.badRequest().build();
+		}
 	}	
-	
-	
 }
