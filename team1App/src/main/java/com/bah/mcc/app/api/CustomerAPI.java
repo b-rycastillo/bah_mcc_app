@@ -65,7 +65,7 @@ public class CustomerAPI {
 		//  your response should be if no customer matches the name the caller is searching for.
 		//  With the data model implemented in CustomersRepository, do you need to handle more than
 		//  one match per request?
-//		Customer foundCustomer = null;
+//		invalid[] foundCustomer = {null};
 //		repo.findAll().forEach(customer -> {
 //			if (customer.getName().equalsIgnoreCase(username)) {
 //				foundCustomer = customer;
