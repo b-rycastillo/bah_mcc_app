@@ -21,6 +21,15 @@ public class Registration {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	long id;
 	
+	@Column(name="EVENT_ID")
+	long event_id;
+	
+	@Column(name="CUSTOMER_ID")
+	long customer_id;
+	
+	String registration_date;
+	
+	String notes;
 	public long getId() {
 		return id;
 	}
@@ -51,10 +60,6 @@ public class Registration {
 	public void setId(long id) {
 		this.id = id;
 	}
-	@Column(name="REGISTRATION_NAME")
-	long event_id;
-	long customer_id;
-	String registration_date;
-	String notes;
+	
 	
 }
