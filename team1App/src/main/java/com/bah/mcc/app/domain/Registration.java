@@ -27,7 +27,7 @@ public class Registration {
 	@Column(name="CUSTOMER_ID")
 	String customer_id;
 	
-	String registration_date;
+	Date registration_date;
 	
 	String notes;
 	public long getId() {
@@ -45,10 +45,10 @@ public class Registration {
 	public void setCustomer_id(String customer_id) {
 		this.customer_id = customer_id;
 	}
-	public String getRegistration_date() {
+	public Date getRegistration_date() {
 		return registration_date;
 	}
-	public void setRegistration_date(String registration_date) {
+	public void setRegistration_date(Date registration_date) {
 		this.registration_date = registration_date;
 	}
 	public String getNotes() {
