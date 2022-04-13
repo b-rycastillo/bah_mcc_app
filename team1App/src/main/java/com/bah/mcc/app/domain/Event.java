@@ -16,7 +16,7 @@ public class Event {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	long id;
 	
-	@Column(name="CODE")
+	@Column(name="EVENT_CODE")
 	String code;
 	
 	@Column(name="TITLE")
