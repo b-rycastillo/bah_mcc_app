@@ -8,4 +8,4 @@ EXPOSE 8080
 VOLUME /tmp
 ARG LIBS=app/build/libs
 COPY --from=builder ${LIBS}/ /app/lib
-ENTRYPOINT ["java","-jar","./app/lib/spring-boot-jpa-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","./app/lib/team1App-0.0.1-SNAPSHOT.jar"]
