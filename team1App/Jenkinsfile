@@ -1,6 +1,6 @@
 node {
     stage ("Checkout DataApi"){
-        git url: '/home/osboxes/Desktop/DataApi/bah_mcc_app-main/team1App'
+        git url: '/home/osboxes/Desktop/DataApi/bah_mcc_app-main'
     }
     
     stage ("Gradle Build - DataApi") {
