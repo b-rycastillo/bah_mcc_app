@@ -4,11 +4,11 @@ node {
     }
     
     stage ("Gradle Build - DataApi") {
-        sh 'gradle clean build'
+        sh 'gradle -b team1App/build.gradle clean build'
     }
     
     stage ("Gradle Bootjar-Package - DataApi") {
-        sh 'gradle bootjar'
+        sh 'gradle -b team1App/build.gradle bootjar'
     }
     
     stage ("Containerize the app-docker build - DataApi") {
