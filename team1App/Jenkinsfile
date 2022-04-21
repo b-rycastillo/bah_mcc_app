@@ -1,6 +1,6 @@
 node {
     stage ("Checkout DataApi"){
-        git url: '/home/osboxes/Desktop/mccprojectfox/mccprojectfox/MsdProjectDataService'
+        git url: '/home/osboxes/Desktop/DataApi/bah_mcc_app-main/team1App'
     }
     
     stage ("Gradle Build - DataApi") {
