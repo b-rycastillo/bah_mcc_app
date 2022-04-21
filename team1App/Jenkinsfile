@@ -1,14 +1,15 @@
 node {
     stage ("Checkout DataApi"){
-        git url: '/home/osboxes/Desktop/DataApi/bah_mcc_app-main'
+        git url: '/home/osboxes/Desktop/DataApi/bah_mcc_app-main/team1App'
     }
-    
+     
+
     stage ("Gradle Build - DataApi") {
-        sh 'gradle -b team1App/build.gradle clean build'
+        sh 'gradle clean build'
     }
     
     stage ("Gradle Bootjar-Package - DataApi") {
-        sh 'gradle -b team1App/build.gradle bootjar'
+        sh 'gradle bootjar'
     }
     
     stage ("Containerize the app-docker build - DataApi") {
